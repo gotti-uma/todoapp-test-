@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <div>
+          <p class="app__eyebrow">今日のタスク</p>
+          <h1>Todo App</h1>
+          <p class="app__subtitle">シンプルで動的なToDo管理</p>
+        </div>
+        <div class="app__count" aria-live="polite">
+          <span id="remaining-count">0</span>
+          <span>件のタスクが未完了</span>
+        </div>
+      </header>
+
+      <section class="composer" aria-label="タスク追加">
+        <form id="todo-form" class="composer__form">
+          <div class="composer__input">
+            <label for="todo-input">新しいタスク</label>
+            <input
+              id="todo-input"
+              name="todo"
+              type="text"
+              placeholder="例: 企画書を作成する"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="composer__meta">
+            <label for="todo-priority">優先度</label>
+            <select id="todo-priority" name="priority">
+              <option value="low">低</option>
+              <option value="medium" selected>中</option>
+              <option value="high">高</option>
+            </select>
+          </div>
+          <button type="submit" class="button button--primary">追加</button>
+        </form>
+      </section>
+
+      <section class="controls" aria-label="フィルター">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" type="button" data-filter="all" role="tab">すべて</button>
+          <button class="tab" type="button" data-filter="active" role="tab">未完了</button>
+          <button class="tab" type="button" data-filter="completed" role="tab">完了</button>
+        </div>
+        <button id="clear-completed" class="button button--ghost" type="button">
+          完了を削除
+        </button>
+      </section>
+
+      <section class="list" aria-label="タスク一覧">
+        <ul id="todo-list" class="list__items"></ul>
+        <p id="empty-state" class="list__empty">タスクはまだありません。まずは追加しましょう。</p>
+      </section>
+
+      <section class="summary" aria-label="今日の進捗">
+        <div>
+          <p class="summary__label">完了率</p>
+          <div class="summary__progress">
+            <div id="progress-bar" class="summary__bar"></div>
+          </div>
+        </div>
+        <div>
+          <p class="summary__label">完了したタスク</p>
+          <p class="summary__value"><span id="completed-count">0</span> / <span id="total-count">0</span></p>
+        </div>
+      </section>
+    </main>
+
+    <template id="todo-item-template">
+      <li class="list__item">
+        <label class="list__check">
+          <input type="checkbox" />
+          <span class="list__status"></span>
+        </label>
+        <div class="list__content">
+          <p class="list__title"></p>
+          <p class="list__meta"></p>
+        </div>
+        <button class="list__delete" type="button" aria-label="削除">×</button>
+      </li>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
